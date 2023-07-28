@@ -1,10 +1,26 @@
-import React from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
+import React, { useState } from 'react';
 
-const Home = () => {
+import { 
+  SafeAreaView, 
+  View, 
+  Text, 
+  ScrollView 
+} from 'react-native';
+
+import { Stack, useRouter } from 'expo-router';
+
+// import { COLORS, icons, images, FONT, SIZES, SHADOWS } from '../constants';
+
+import { Container } from '../styles/Home';
+
+const Home:React.FC = () => {
   return (
     <SafeAreaView>
-      <Text>Hello World! 🦇🔥</Text>
+      <Container>
+        <Text>
+          Hello World! 🦇🔥
+        </Text>
+      </Container>
     </SafeAreaView>
   )
 }
