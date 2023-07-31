@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { StyleSheet } from 'react-native';
+import { Alert, Keyboard, KeyboardAvoidingView, TouchableNativeFeedback } from 'react-native';
 
 import {
   Container,
@@ -10,158 +10,200 @@ import {
   Logo
 } from '../styles/Register';
 
-import { TextInput } from 'react-native-paper'
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { TextInput } from 'react-native-paper';
 
 import { Stack, useRouter } from 'expo-router';
 
-import { Button } from '../components';
+import { Button, ControlledInput } from '../components';
 
 import { useDispatch } from 'react-redux';
 
 import { setName, setEmail, setPhone, setPassword } from '../redux/reducers/profileState';
 
-const RegisterStyle = StyleSheet.create({
-  shadow: {
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  confirmPassword: string;
+}
 
-    elevation: 5,
-  },
-  passwordInput: {
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#666",
-
-    height: 48.578,
-
-    color: '#66666',
-
-    backgroundColor: "transparent",
-  }
+const VALID_EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const VALID_PHONE_REGEX = /^[0-9]{10,11}$/;
+const schema = yup.object({
+  name: yup.string().min(4, "O nome deve ter ao menos 4 caracteres").required("Informe seu Nome."),
+  email: yup.string().email("Email inválido").required("Informe seu Email."),
+  phone: yup.string().matches(VALID_PHONE_REGEX,"Telefone invalido").required("Informe seu Telefone."),
+  password: yup.string().min(6, "A senha deve ter ao menos 6 digitos.").required("Informe sua senha."),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], "As senhas não coincidem").required("Informe sua senha.")
 });
 
 const register:React.FC = () => {
+  const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: yupResolver(schema)
+  });
+
   const dispatch = useDispatch()
   const router = useRouter();
 
-  const handleSubmitRegister = () => {
-    if(nameState) {
-      dispatch(setName(nameState));
+  const handleSubmitRegister = async (data: FormData) => {
+    // if(nameState.trim() === "") {
+    //   return Alert.alert("Informe o nome.");
+    // }
+    // if(passwordState.trim() === "") {
+    //   return Alert.alert("Informe a senha.");
+    // }
+    // if(passwordState.trim().length < 6) {
+    //   return Alert.alert("A senha deve ter ao menos 6 digitos.");
+    // }
+    // if(passwordState.trim() !== confirmPasswordState.trim()) {
+    //   return Alert.alert("As senhas nao se conhecidem.");
+    // }
+    // if(emailState.trim() === "") {
+    //   return Alert.alert("Informe o email.");
+    // }
+    // if(!(VALID_EMAIL_REGEX).test(emailState.toLowerCase())){
+    //   return Alert.alert("Email inválido.");
+    // }
+    // if(phoneState.trim() === "") {
+    //   return Alert.alert("Informe o email.");
+    // }
+    // if(!(VALID_PHONE_REGEX).test(phoneState.toLowerCase())){
+    //   return Alert.alert("Telefone inválido.");
+    if(data.name) {
+      dispatch(setName(data.name));
     }
-    if(emailState.length > 0) {
-      dispatch(setEmail(emailState));
+    if(data.email) {
+      dispatch(setEmail(data.email));
     }
-    if(phoneState.length > 0) {
-      dispatch(setPhone(phoneState));
+    if(data.phone) {
+      dispatch(setPhone(data.phone));
     }
-    if(passwordState.length > 0 && confirmPasswordState.length > 0) {
-      if(passwordState === confirmPasswordState) {
-        dispatch(setPassword(passwordState));
-      }
+    if(data.password && data.confirmPassword ) {
+        dispatch(setPassword(data.password ));
     }
 
+    await Alert.alert("Cadastro realizado com sucesso!");
     router.push("/termsAndService");
   }
 
-  const [nameState,setNameState]                        = useState<String>("");
-  const [emailState,setEmailState]                      = useState<String>("");
-  const [phoneState,setPhoneStae]                       = useState<String>("");
-  const [passwordState,setPasswordState]                = useState<String>("");
-  const [confirmPasswordState,setConfirmPassowordState] = useState<String>("");
+  // const [nameState,setNameState]                        = useState<String>("");
+  // const [emailState,setEmailState]                      = useState<String>("");
+  // const [phoneState,setPhoneStae]                       = useState<String>("");
+  // const [passwordState,setPasswordState]                = useState<String>("");
+  // const [confirmPasswordState,setConfirmPassowordState] = useState<String>("");
 
-  const [passwordVisible, setPasswordVisible] = useState<Boolean>(false);
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
-  
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
+        <TouchableNativeFeedback onPress={Keyboard.dismiss}>
+          <KeyboardAvoidingView behavior='position' enabled>
+            <Container 
+              contentContainerStyle={{ 
+                alignItems: "center",
+              }}
+            >
+              {/* @ts-ignore */}
+              <Logo />
+              
+              <ContentInput>
+                <Label>
+                  Nome
+                </Label>
+                <ControlledInput 
+                  name='name'
+                  control={control}
+                  error={errors.name}
+                  placeholder="Name"
+                  placeholderTextColor={"#6666"}
+                />
+              </ContentInput>
 
-      <Container 
-        contentContainerStyle={{ 
-          alignItems: "center"
-        }}
-      >
-        {/* @ts-ignore */}
-        <Logo />
-        
-        <ContentInput>
-          <Label>
-            Nome
-          </Label>
-          <Input 
-            placeholder='nome' 
-            style={RegisterStyle.shadow}
-            onChangeText={(value) => setNameState(value)}
-          />
-        </ContentInput>
+              <ContentInput>
+                <Label>
+                  E-mail
+                </Label>
+                <ControlledInput 
+                  name='email'
+                  control={control}
+                  autoCapitalize="none"
+                  keyboardType='email-address'
+                  error={errors.email}
+                  placeholder="e-mail"
+                  placeholderTextColor={"#6666"}
+                />
+              </ContentInput>
 
-        <ContentInput>
-          <Label>
-            E-mail
-          </Label>
-          <Input 
-            placeholder='e-mail' 
-            style={RegisterStyle.shadow} 
-            onChangeText={setEmailState}
-          />
-        </ContentInput>
+              <ContentInput>
+                <Label>
+                  Telefone
+                </Label>
+                <ControlledInput 
+                  name='phone'
+                  control={control}
+                  error={errors.phone}
+                  placeholder="telefone"
+                  placeholderTextColor={"#6666"}
+                />
+              </ContentInput>
 
-        <ContentInput>
-          <Label>
-            Telefone
-          </Label>
-          <Input 
-            placeholder='telefone' 
-            style={RegisterStyle.shadow} 
-            onChangeText={setPhoneStae}
-          />
-        </ContentInput>
+              <ContentInput>
+                <Label>
+                  Criar senha
+                </Label>
+                <ControlledInput 
+                  name='password'
+                  control={control}
+                  error={errors.password}
+                  placeholder="senha"
+                  placeholderTextColor={"#6666"}
+                  secureTextEntry={passwordVisible}
+                  autoCapitalize="none"
+                  //@ts-ignore
+                  right={
+                    <TextInput.Icon
+                      icon={passwordVisible ? 'eye' : 'eye-off'}
+                      onPress={() => setPasswordVisible((visible) => !visible)}
+                    />
+                  } 
+                />
+              </ContentInput>
 
-        <ContentInput>
-          <Label>
-            Criar senha
-          </Label>
-          <TextInput 
-            placeholder='senha' 
-            style={[RegisterStyle.shadow, RegisterStyle.passwordInput]}
-            onChangeText={setPasswordState}
-            // @ts-ignore
-            secureTextEntry={passwordVisible}
-            right={
-              <TextInput.Icon
-                icon={passwordVisible ? 'eye' : 'eye-off'}
-                onPress={() => setPasswordVisible((visible) => !visible)}
+              <ContentInput>
+                <Label>
+                  Confirmar senha
+                </Label>
+                <ControlledInput 
+                  name='confirmPassword'
+                  control={control}
+                  error={errors.confirmPassword}
+                  placeholder="senha"
+                  placeholderTextColor={"#6666"}
+                  secureTextEntry={passwordVisible}
+                  autoCapitalize="none"
+                  //@ts-ignore
+                  right={
+                    <TextInput.Icon
+                      icon={passwordVisible ? 'eye' : 'eye-off'}
+                      onPress={() => setPasswordVisible((visible) => !visible)}
+                    />
+                  } 
+                />
+              </ContentInput>
+
+              <Button
+                text='Criar Conta' 
+                onPress={handleSubmit(handleSubmitRegister)} 
               />
-            } 
-          />
-        </ContentInput>
-
-        <ContentInput>
-          <Label>
-            Confirmar senha
-          </Label>
-          <TextInput 
-            placeholder='senha' 
-            style={[RegisterStyle.shadow, RegisterStyle.passwordInput]}
-            onChangeText={setConfirmPassowordState}
-            // @ts-ignore
-            secureTextEntry={passwordVisible}
-            right={
-              <TextInput.Icon
-                icon={passwordVisible ? 'eye' : 'eye-off'}
-                onPress={() => setPasswordVisible((visible) => !visible)}
-              />
-            } 
-          />
-        </ContentInput>
-
-        <Button
-          text='Criar Conta' 
-          onPress={handleSubmitRegister} 
-        />
-      </Container>
+            </Container>
+          </KeyboardAvoidingView>
+        </TouchableNativeFeedback>
     </>
   )
 }

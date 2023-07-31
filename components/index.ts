@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import CardCategoryList from "./CardCategoryList";
 import Modal from "./Modal";
 import Button from "./Button";
+import ControlledInput from "./ControlledInput";
 
 export { 
   Header, 
@@ -13,5 +14,6 @@ export {
   Footer, 
   CardCategoryList,
   Modal,
-  Button
+  Button,
+  ControlledInput
 };

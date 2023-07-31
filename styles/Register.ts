@@ -1,5 +1,7 @@
 import styled from "styled-components/native";
 
+import { TextInput as InputText } from 'react-native-paper'
+
 export const Container = styled.ScrollView`
   display: flex;
   flex-direction: column;

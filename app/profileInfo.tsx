@@ -38,8 +38,8 @@ const profileInfo:React.FC = () => {
       <Stack.Screen options={{ headerShown: false }} />
 
       <ContainerHeader>
-        <TouchableOpacity style={{ position: 'absolute', top: 30, left: 0, marginLeft: 16, backgroundColor: 'red' }} onPress={() => router.back()}>
-          <Image source={{ uri: "../assets/icons/arrow.png" }} alt='back' style={{ width: 18, height: 21 }} />
+        <TouchableOpacity style={{ position: 'relative', top: 30, left: 0, marginLeft: 16, width: 40, height: 40 }} onPress={() => router.back()}>
+          <Image source={ require("../assets/icons/arrow.png") } alt='back' style={{ width: 18, height: 21, transform: [{ rotate: '180deg' }] }} />
         </TouchableOpacity>
         <HeaderTitle>
           Dados
@@ -52,7 +52,8 @@ const profileInfo:React.FC = () => {
             Nome Completo
           </Label>
           <Input 
-            placeholder='nome' 
+            placeholder='nome'
+            editable={false}
             style={ProfileInfoStyle.shadow}
             value={name.toString() || ""}
           />
@@ -66,6 +67,7 @@ const profileInfo:React.FC = () => {
           <Input 
             placeholder='e-mail' 
             style={ProfileInfoStyle.shadow}
+            editable={false}
             value={email.toString() || ""}
           />
         </ContentInput>
@@ -77,6 +79,7 @@ const profileInfo:React.FC = () => {
           <Input 
             placeholder='telefone' 
             style={ProfileInfoStyle.shadow}
+            editable={false}
             value={phone.toString() || ""}
           />
         </ContentInput>
@@ -88,6 +91,7 @@ const profileInfo:React.FC = () => {
           <Input 
             placeholder='senha' 
             style={ProfileInfoStyle.shadow}
+            editable={false}
             value={password.toString() || ""}
           />
         </ContentInput>
