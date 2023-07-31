@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { 
   SafeAreaView, 
   View,
-  Text,
   StyleSheet,
-  Dimensions
 } from 'react-native';
 
 import { 
@@ -21,14 +19,14 @@ import {
   DefaultText,
   ButtonActiveGps,
   TextButtonActiveGps,
-  SeparatorDiv
+  SeparatorDiv,
+  ModalOverlay
 } from '../styles/Home';
 
 import { Stack, useRouter } from 'expo-router';
-
-// import { COLORS, icons, images, FONT, SIZES, SHADOWS } from '../constants';
-
 import { Container } from '../styles/Home';
+import { RootState } from '../redux/store';
+import { useSelector } from 'react-redux';
 
 const styleHome = StyleSheet.create({
   containerButtonGps: {
@@ -40,24 +38,32 @@ const styleHome = StyleSheet.create({
 })
 
 const Home:React.FC = () => {
+  const router = useRouter();
+  const terms = useSelector((state: RootState) => state.profile.termsAndService);
 
   const [openModal, setOpenModal] = useState<boolean>(false);
-
-  const router = useRouter();
+  
+  // useEffect(() => {
+  //   if(!terms) {
+  //     router.push("/register");
+  //   }
+  // },[terms]);
 
   return (
     <SafeAreaView>
       <Stack.Screen options={{ headerShown: false  }} />
-
+      
       {openModal && (
-        <Modal
-          buttonCancel='NEGAR'
-          subtitle={"DURANTE O USO DO APP"}
-          title={"Permitir que o app Reservou acesse a localização deste dispositivo?"}
-          buttonOk={""}
-          subtitle2={"APENAS ESTA VEZ"}
-          setModalShow={setOpenModal}
-        />
+        <ModalOverlay>
+          <Modal
+            buttonCancel='NEGAR'
+            subtitle={"DURANTE O USO DO APP"}
+            title={"Permitir que o app Reservou acesse a localização deste dispositivo?"}
+            buttonOk={""}
+            subtitle2={"APENAS ESTA VEZ"}
+            setModalShow={setOpenModal}
+          />
+        </ModalOverlay>
       )}
 
       <Container showsVerticalScrollIndicator={false} modalShow={openModal}>

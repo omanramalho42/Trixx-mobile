@@ -4,6 +4,7 @@ import CardServiceList from "./CardServiceList";
 import Footer from "./Footer";
 import CardCategoryList from "./CardCategoryList";
 import Modal from "./Modal";
+import Button from "./Button";
 
 export { 
   Header, 
@@ -11,5 +12,6 @@ export {
   CardServiceList, 
   Footer, 
   CardCategoryList,
-  Modal
+  Modal,
+  Button
 };
