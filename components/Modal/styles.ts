@@ -1,13 +1,11 @@
 import styled from "styled-components/native";
 
 export const ContainerModal = styled.View`
-  position: absolute; 
-  
   width: 332.075px;
   height: 237.233px;
 
   border-radius: 18.288px;
-  background-color: #F3F3F3;
+  background-color: #F9F9F9;
 
   padding: 12px 20px;
 
@@ -15,9 +13,6 @@ export const ContainerModal = styled.View`
 
   justify-content: center;
   align-items: center;
-
-  top: 20%; 
-  left: 5%; 
   
   z-index: 10; 
 `;

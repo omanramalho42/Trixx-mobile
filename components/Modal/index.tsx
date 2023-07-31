@@ -18,20 +18,16 @@ interface ModalProps {
   setModalShow: (boolean) => void;
 }
 
-const Modal:FC<ModalProps> = ({ title, subtitle, buttonCancel, buttonOk, subtitle2, setModalShow }: ModalProps) => {
+const Modal:FC<ModalProps> = ({ 
+  title, 
+  subtitle, 
+  buttonCancel, 
+  buttonOk, 
+  subtitle2, 
+  setModalShow 
+}: ModalProps ) => {
   return (
-    <ContainerModal 
-      style={{ 
-        // width: Dimensions.get('window').width - 40, 
-        // maxHeight: Dimensions.get('window').height - 80,
-        // position: 'absolute',
-        // width: Dimensions.get('window').width - 40,
-        // maxHeight: Dimensions.get('window').height - 80,
-        // top: '50%',
-        // left: '25%',
-        // transform: [{ translateX: -((Dimensions.get('window').width - 40) / 2) }, { translateY: -((Dimensions.get('window').height - 80) / 2) }],     
-      }}
-    >
+    <ContainerModal>
       <ModalTitle>
         { title }
       </ModalTitle>
