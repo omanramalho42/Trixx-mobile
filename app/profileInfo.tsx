@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 
 import { Container, ContentInput, Input, Label } from '../styles/Register'
 
@@ -12,6 +12,7 @@ import { ContainerHeader, HeaderTitle } from '../styles/ProfileInfo'
 
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const ProfileInfoStyle = StyleSheet.create({
   shadow: {
@@ -37,9 +38,9 @@ const profileInfo:React.FC = () => {
       <Stack.Screen options={{ headerShown: false }} />
 
       <ContainerHeader>
-        <Text style={{ position: 'absolute', top: 30, left: 0, marginLeft: 16 }} onPress={() => router.back()}>
-          back
-        </Text>
+        <TouchableOpacity style={{ position: 'absolute', top: 30, left: 0, marginLeft: 16, backgroundColor: 'red' }} onPress={() => router.back()}>
+          <Image source={{ uri: "../assets/icons/arrow.png" }} alt='back' style={{ width: 18, height: 21 }} />
+        </TouchableOpacity>
         <HeaderTitle>
           Dados
         </HeaderTitle>
@@ -82,7 +83,7 @@ const profileInfo:React.FC = () => {
         
         <ContentInput>
           <Label>
-            Celular
+            Senha
           </Label>
           <Input 
             placeholder='senha' 

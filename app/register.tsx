@@ -10,13 +10,14 @@ import {
   Logo
 } from '../styles/Register';
 
-import { Feather } from '@expo/vector-icons';
+import { TextInput } from 'react-native-paper'
 
 import { Stack, useRouter } from 'expo-router';
 
 import { Button } from '../components';
 
 import { useDispatch } from 'react-redux';
+
 import { setName, setEmail, setPhone, setPassword } from '../redux/reducers/profileState';
 
 const RegisterStyle = StyleSheet.create({
@@ -27,6 +28,17 @@ const RegisterStyle = StyleSheet.create({
     shadowRadius: 4,
 
     elevation: 5,
+  },
+  passwordInput: {
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#666",
+
+    height: 48.578,
+
+    color: '#66666',
+
+    backgroundColor: "transparent",
   }
 });
 
@@ -58,6 +70,9 @@ const register:React.FC = () => {
   const [phoneState,setPhoneStae]                       = useState<String>("");
   const [passwordState,setPasswordState]                = useState<String>("");
   const [confirmPasswordState,setConfirmPassowordState] = useState<String>("");
+
+  const [passwordVisible, setPasswordVisible] = useState<Boolean>(false);
+
   
   return (
     <>
@@ -80,8 +95,6 @@ const register:React.FC = () => {
             style={RegisterStyle.shadow}
             onChangeText={(value) => setNameState(value)}
           />
-          {/* <Feather name="eye-off" size={24} color="black" /> */}
-          
         </ContentInput>
 
         <ContentInput>
@@ -110,10 +123,18 @@ const register:React.FC = () => {
           <Label>
             Criar senha
           </Label>
-          <Input 
+          <TextInput 
             placeholder='senha' 
-            style={RegisterStyle.shadow} 
+            style={[RegisterStyle.shadow, RegisterStyle.passwordInput]}
             onChangeText={setPasswordState}
+            // @ts-ignore
+            secureTextEntry={passwordVisible}
+            right={
+              <TextInput.Icon
+                icon={passwordVisible ? 'eye' : 'eye-off'}
+                onPress={() => setPasswordVisible((visible) => !visible)}
+              />
+            } 
           />
         </ContentInput>
 
@@ -121,10 +142,18 @@ const register:React.FC = () => {
           <Label>
             Confirmar senha
           </Label>
-          <Input 
+          <TextInput 
             placeholder='senha' 
-            style={RegisterStyle.shadow}
-            onChangeText={setConfirmPassowordState} 
+            style={[RegisterStyle.shadow, RegisterStyle.passwordInput]}
+            onChangeText={setConfirmPassowordState}
+            // @ts-ignore
+            secureTextEntry={passwordVisible}
+            right={
+              <TextInput.Icon
+                icon={passwordVisible ? 'eye' : 'eye-off'}
+                onPress={() => setPasswordVisible((visible) => !visible)}
+              />
+            } 
           />
         </ContentInput>
 

@@ -44,11 +44,11 @@ const Home:React.FC = () => {
   const [termos] = useState(terms || 0);
   const [openModal, setOpenModal] = useState<boolean>(false);
   
-  useEffect(() => {
-    if(!termos) {
-      router.push("/register");
-    }
-  },[termos]);
+  // useEffect(() => {
+  //   if(!termos) {
+  //     router.push("/register");
+  //   }
+  // },[termos]);
 
   return (
     <SafeAreaView>
