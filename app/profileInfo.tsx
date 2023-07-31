@@ -37,7 +37,7 @@ const profileInfo:React.FC = () => {
       <Stack.Screen options={{ headerShown: false }} />
 
       <ContainerHeader>
-        <Text style={{ marginLeft: 16 }}>
+        <Text style={{ position: 'absolute', top: 30, left: 0, marginLeft: 16 }} onPress={() => router.back()}>
           back
         </Text>
         <HeaderTitle>

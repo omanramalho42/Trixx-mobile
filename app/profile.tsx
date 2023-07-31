@@ -30,6 +30,7 @@ const profile:React.FC = () => {
     { title: 'Meus Dados', icon: '', link : 'profileInfo', inactive: false },
     { title: 'Alterar senha', icon: '', link : '', inactive: true },
     { title: 'Ajuda', icon: '', link : '', inactive: true },
+    { title: 'Registro', icon: '', link : 'register', inactive: true },
   ];
 
   return (
@@ -40,8 +41,16 @@ const profile:React.FC = () => {
       <ScrollView>
         
         <ContainerHeader>
-          <Text style={{ justifyContent: 'flex-start', textAlign: 'left', marginLeft: 15 }}>back</Text>
+          <Text 
+            style={{ justifyContent: 'flex-start', textAlign: 'left', marginLeft: 15 }}
+            onPress={() => router.back()}
+          >
+            back
+          </Text>
           <Avatar />
+          <Text style={{ position: 'absolute', top: 150, right: 140 }}>
+            c
+          </Text>
           <TitleHeader>
             Usuário Teste
           </TitleHeader>

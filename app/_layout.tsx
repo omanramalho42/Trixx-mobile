@@ -2,7 +2,8 @@ import React, { useCallback, useEffect } from 'react'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen';
-
+import { PaperProvider } from 'react-native-paper';
+import { Provider as StoreProvider } from 'react-redux';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
 
@@ -40,7 +41,15 @@ const Layout:React.FC = () => {
 
   if(!fontsLoaded) return null;
 
-  return <Provider store={store}><Stack  /></Provider>
+  return (
+    <StoreProvider store={store}>
+      <PaperProvider>
+        {/* <Provider store={store}> */}
+          <Stack  />
+        {/* </Provider> */}
+      </PaperProvider>
+    </StoreProvider>
+  )
 }
 
 export default Layout
