@@ -137,6 +137,5 @@ Lembre-se de manter as dependências atualizadas e de fazer backup regularmente 
 ![WhatsApp Image 2023-07-31 at 14 49 34 (1)](https://github.com/omanramalho42/Trixx-mobile/assets/64960771/003e9d7a-e848-4b36-a787-a2e72753f07f)
 ![WhatsApp Image 2023-07-31 at 14 49 36](https://github.com/omanramalho42/Trixx-mobile/assets/64960771/d87f7dee-b0d2-4f38-8d0d-7329461257f0)
 ![WhatsApp Image 2023-07-31 at 14 49 37](https://github.com/omanramalho42/Trixx-mobile/assets/64960771/0b4b2ccb-4398-40c5-867b-83de2f1023a1)
-![WhatsApp Image 2023-07-31 at 14 49 34](https://github.com/omanramalho42/Trixx-mobile/assets/64960771/7cfdcd4e-968d-4e10-b4aa-0aef40e5b494)
-
+![WhatsApp Image 2023-07-31 at 14 49 36](https://github.com/omanramalho42/Trixx-mobile/assets/64960771/194db88b-faf8-4995-be9e-5aaf4e76fe24)
 
