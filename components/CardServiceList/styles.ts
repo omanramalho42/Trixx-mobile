@@ -44,8 +44,8 @@ export const PromotionBadgeCardService = styled.View`
 
   position:         absolute;
   
-  top:              75;
-  left:             105;
+  top:              75px;
+  left:             105px;
 
   z-index:          10;
 `;

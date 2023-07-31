@@ -48,6 +48,11 @@ const ControlledInput:FC<Props> = ({ control, name, error, ...rest }: Props) => 
           // @ts-ignore
           <TextInput
             onChangeText={onChange}
+            // @ts-ignore
+            selectionColor="#E1B12C"
+            underlineColor='transparent'
+            activeUnderlineColor='#E1B12C'
+            underlineStyle={{ borderRadius: 8, marginHorizontal: 5 }}
             value={value}
             style={[RegisterStyle.shadow,RegisterStyle.input]}
             { ...rest }

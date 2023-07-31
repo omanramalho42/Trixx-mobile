@@ -91,12 +91,6 @@ const register:React.FC = () => {
     router.push("/termsAndService");
   }
 
-  // const [nameState,setNameState]                        = useState<String>("");
-  // const [emailState,setEmailState]                      = useState<String>("");
-  // const [phoneState,setPhoneStae]                       = useState<String>("");
-  // const [passwordState,setPasswordState]                = useState<String>("");
-  // const [confirmPasswordState,setConfirmPassowordState] = useState<String>("");
-
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   return (

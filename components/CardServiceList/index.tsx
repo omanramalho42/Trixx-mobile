@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { 
   ScrollView, 
@@ -92,7 +92,7 @@ const CardServiceList:React.FC = () => {
         <CardService 
           key={idx}
           style={ [StyleCardService.shadow,{ backgroundColor: selectedIcon === idx ? "#E1B12C" : "#F9F9F9"}] }
-          onPress={() => setSelectedIcon(idx)}
+          onPress={() => selectedIcon === idx ? setSelectedIcon(null) : setSelectedIcon(idx)}
         >
           { i.discount && (
             <PromotionBadgeCardService>
