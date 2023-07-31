@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import { View } from 'react-native'
+import { View } from 'react-native';
 
 import { 
   ContainerHeader,
@@ -9,13 +9,21 @@ import {
   ToggleButton,
   ToggleIcon,
   FilterIcon
-} from './styles'
+} from './styles';
 
-const Header:React.FC = () => {
+import { useRouter } from 'expo-router';
+
+const Header:React.FC= () => {
+  const router = useRouter();
+
   return (
     <View>
       <ContainerHeader>
-        <ToggleButton>
+        <ToggleButton 
+          onPress={
+            () => router.push("/profile")
+          }
+        >
           {/* @ts-ignore */}
           <ToggleIcon />
         </ToggleButton>

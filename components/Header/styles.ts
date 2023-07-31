@@ -1,3 +1,4 @@
+import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 
 export const ContainerHeader = styled.View`
@@ -12,7 +13,7 @@ export const ContainerHeader = styled.View`
   height:           102px;
 `;
 
-export const ToggleButton = styled.TouchableOpacity`
+export const ToggleButton = styled.TouchableOpacity<TouchableOpacityProps>`
   margin: 17px 0px 23px 16px;
 `;
 
